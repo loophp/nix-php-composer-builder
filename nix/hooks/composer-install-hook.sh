@@ -25,7 +25,6 @@ composerInstallConfigureHook() {
     fi
 
     chmod +w composer.json composer.lock
-    cp composer.json composer.json.orig
 
     echo "Finished composerInstallConfigureHook"
 }
@@ -84,16 +83,14 @@ composerInstallInstallHook() {
     rm packages.json
 
     # Copy the relevant files only in the store.
-    mkdir -p $out/share/php/${pname}
-    cp -r . $out/share/php/${pname}/
+    mkdir -p $out/build
+    cp -r . $out/build/
 
     # Create symlinks for the binaries.
     jq -r -c 'try .bin[]' composer.json | while read bin; do
-        mkdir -p $out/share/php/${pname} $out/bin
-        ln -s $out/share/php/${pname}/$bin $out/bin/$(basename $bin)
+        mkdir -p $out/bin
+        ln -s $out/build/$bin $out/bin/$(basename $bin)
     done
-
-    mv composer.json.orig composer.json
 
     echo "Finished composerInstallInstallHook"
 }
