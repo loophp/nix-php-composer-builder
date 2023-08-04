@@ -52,11 +52,13 @@ pkgs = import inputs.nixpkgs {
 
 ### Step 3
 
-Use the `buildComposerProject` function to build your project, you need to pass
-the `php` attribute as first argument:
+Use the `buildComposerProject` function to build your project:
 
 ```nix
-packages.default = pkgs.api.buildComposerProject php {
+packages.default = pkgs.api.buildComposerProject {
+    # Customize the version of PHP you want to use.
+    # inherit php;
+
     pname = "my-php-project";
     version = "1.0.0";
 
