@@ -33,13 +33,13 @@ let
 in
 {
   pname = "composer-local-repo-plugin";
-  version = "ff33aaf5454888e2669f366639be9877dceb9599";
+  version = "abbc7f88f324b1153c9fe21701c338d63bd66b18";
 
   src = fetchFromGitHub {
     owner = "drupol";
     repo = "composer-local-repo-plugin";
     rev = finalAttrs.version;
-    hash = "sha256-nSjAicyvStVoBFm7SJy4EYQIwrAaLjm72XMgsPF3CSg=";
+    hash = "sha256-NENgRc3EgvqYEdPIo0gcB7Ng8xvDhOuD/8FgCGvxUcA=";
   };
 
   COMPOSER_CACHE_DIR = "/dev/null";
