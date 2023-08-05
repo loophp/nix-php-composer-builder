@@ -52,11 +52,14 @@ composerInstallBuildHook() {
 
     # Since the composer.json file has been modified in the previous step, the
     # composer.lock file needs to be updated.
+    # When the flag --no-install is set, building Drupal works, but not mezzio/mezzio-skeleton, and vice-versa.
+    # Because of roave/security-advisories... Need investigations.
     COMPOSER_DISABLE_NETWORK=1 \
     COMPOSER_ROOT_VERSION="${version}" \
     composer \
       --lock \
       --no-ansi \
+      --no-install \
       --no-interaction \
       --no-plugins \
       --no-scripts \
