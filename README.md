@@ -123,6 +123,50 @@ symfony-demo = pkgs.api.buildComposerProject {
 
 </details>
 
+### Packaging `clue/framework-x`
+
+<details>
+
+```nix
+clue-framework-x = pkgs.api.buildComposerProject {
+  pname = "clue-framework-x";
+  version = "1.0.0-dev";
+
+  src = pkgs.fetchFromGitHub {
+    owner = "clue";
+    repo = "framework-x";
+    rev = "277e9a582c90042e3e32c7ef045123848ef147fc";
+    sha256 = "sha256-wtMJcNwxvqGKtrr8Ak4ON4b9jMwBGlBUs+S2M8iSHf4=";
+  };
+
+  vendorHash = "sha256-ULgZtwT1D371MaeUpEwiS1BQvw22y4/rZsPJ5+HFdhQ=";
+};
+```
+
+### Packaging `mezzio/mezzio-skeleton`
+
+**This is not yet working, issue with `roave/security-advisories`, work ongoing...**
+
+<details>
+
+```nix
+mezzio-skeleton = pkgs.api.buildComposerProject {
+  pname = "mezzio-skeleton";
+  version = "3.15.0-dev";
+
+  src = pkgs.fetchFromGitHub {
+    owner = "mezzio";
+    repo = "mezzio-skeleton";
+    rev = "2eb90de8cd7b8efb1b31d505385ce92c17153608";
+    sha256 = "sha256-D3jmCcYXpH92r6yvn/2SlQ1G9yd/izHJjcYfunk/jjA=";
+  };
+
+  vendorHash = "sha256-KX+EkUdJs02yUkV7N8olXozTEO/7/SgUI/at5yCTMrw=";
+};
+```
+
+</details>
+
 ## Contributing
 
 Feel free to contribute by sending pull requests. We are a usually very
