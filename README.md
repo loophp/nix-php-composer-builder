@@ -147,8 +147,6 @@ clue-framework-x = pkgs.api.buildComposerProject {
 
 ### Packaging `mezzio/mezzio-skeleton`
 
-**This is not yet working, issue with `roave/security-advisories`, work ongoing...**
-
 <details>
 
 ```nix
@@ -163,7 +161,7 @@ mezzio-skeleton = pkgs.api.buildComposerProject {
     sha256 = "sha256-D3jmCcYXpH92r6yvn/2SlQ1G9yd/izHJjcYfunk/jjA=";
   };
 
-  vendorHash = "sha256-KX+EkUdJs02yUkV7N8olXozTEO/7/SgUI/at5yCTMrw=";
+  vendorHash = "sha256-YYBQ+AV8b8xozJpemjfnTrbY8sWgP8BBp59RLCFHfpc=";
 };
 ```
 
