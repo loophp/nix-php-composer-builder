@@ -6,8 +6,6 @@
 , makeBinaryWrapper
 , ...
 }:
-
-stdenvNoCC.mkDerivation (finalAttrs:
 let
   composerKeys = stdenvNoCC.mkDerivation (finalComposerKeysAttrs: {
     pname = "composer-keys";
@@ -31,15 +29,15 @@ let
     '';
   });
 in
-{
+stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "composer-local-repo-plugin";
-  version = "abbc7f88f324b1153c9fe21701c338d63bd66b18";
+  version = "40bfd0c52439d89994e7414299493a097705a541";
 
   src = fetchFromGitHub {
     owner = "drupol";
     repo = "composer-local-repo-plugin";
     rev = finalAttrs.version;
-    hash = "sha256-NENgRc3EgvqYEdPIo0gcB7Ng8xvDhOuD/8FgCGvxUcA=";
+    hash = "sha256-nSjAicyvStVoBFm7SJy4EYQIwrAaLjm72XMgsPF3CSg=";
   };
 
   COMPOSER_CACHE_DIR = "/dev/null";
