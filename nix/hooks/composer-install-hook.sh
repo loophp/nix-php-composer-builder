@@ -57,7 +57,6 @@ composerInstallBuildHook() {
     composer \
       --lock \
       --no-ansi \
-      --no-install \
       --no-interaction \
       --no-plugins \
       --no-scripts \
