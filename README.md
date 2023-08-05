@@ -92,7 +92,7 @@ drupal = pkgs.api.buildComposerProject {
     owner = "drupal";
     repo = "drupal";
     rev = "aec9cf8ca15958546b882f8eb371080dbd39b9ed";
-    sha256 = "sha256-GzGm1X5uKCqkKowWCce7xOjgGa9uDzywSMGJlorNLlY=";
+    hash = "sha256-GzGm1X5uKCqkKowWCce7xOjgGa9uDzywSMGJlorNLlY=";
   };
 
   vendorHash = "sha256-CJtf7r3EhjZTL2vKGXokqy1+uONNq+bA+wGrDmeqIRs=";
@@ -114,7 +114,7 @@ symfony-demo = pkgs.api.buildComposerProject {
     owner = "symfony";
     repo = "demo";
     rev = "e8a754777bd400ecf87e8c6eeea8569d4846d357";
-    sha256 = "sha256-ZG0O8O4X5t/GkAVKhcedd3P7WXYiZ0asMddX1XfUVR4=";
+    hash = "sha256-ZG0O8O4X5t/GkAVKhcedd3P7WXYiZ0asMddX1XfUVR4=";
   };
 
   vendorHash = "sha256-Nv9pRQJ2Iij1IxPNcCk732Q79FWB/ARJRvjPVVyLMEc=";
@@ -136,7 +136,7 @@ clue-framework-x = pkgs.api.buildComposerProject {
     owner = "clue";
     repo = "framework-x";
     rev = "277e9a582c90042e3e32c7ef045123848ef147fc";
-    sha256 = "sha256-wtMJcNwxvqGKtrr8Ak4ON4b9jMwBGlBUs+S2M8iSHf4=";
+    hash = "sha256-wtMJcNwxvqGKtrr8Ak4ON4b9jMwBGlBUs+S2M8iSHf4=";
   };
 
   vendorHash = "sha256-ULgZtwT1D371MaeUpEwiS1BQvw22y4/rZsPJ5+HFdhQ=";
@@ -158,10 +158,32 @@ mezzio-skeleton = pkgs.api.buildComposerProject {
     owner = "mezzio";
     repo = "mezzio-skeleton";
     rev = "2eb90de8cd7b8efb1b31d505385ce92c17153608";
-    sha256 = "sha256-D3jmCcYXpH92r6yvn/2SlQ1G9yd/izHJjcYfunk/jjA=";
+    hash = "sha256-D3jmCcYXpH92r6yvn/2SlQ1G9yd/izHJjcYfunk/jjA=";
   };
 
   vendorHash = "sha256-YYBQ+AV8b8xozJpemjfnTrbY8sWgP8BBp59RLCFHfpc=";
+};
+```
+
+</details>
+
+### Packaging `composer/satis`
+
+<details>
+
+```nix
+satis = pkgs.api.buildComposerProject {
+  pname = "satis";
+  version = "3.15.0-dev";
+
+  src = pkgs.fetchFromGitHub {
+    owner = "composer";
+    repo = "satis";
+    rev = "23fdf4c1893567c6e46a2cc7fcc868b913f03b28";
+    hash = "sha256-UMf9/UQl7lK+AG58lBBFkJMpklooWJ4vpAX5ibciFJI=";
+  };
+
+  vendorHash = "sha256-TNBPGY58KVamNWuuNcz/RggurDlMWZicrZNVFyel0w8=";
 };
 ```
 
