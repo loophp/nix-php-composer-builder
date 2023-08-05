@@ -147,8 +147,6 @@ clue-framework-x = pkgs.api.buildComposerProject {
 
 ### Packaging `mezzio/mezzio-skeleton`
 
-**This is not yet working, issue with `roave/security-advisories`, work ongoing...**
-
 <details>
 
 ```nix
