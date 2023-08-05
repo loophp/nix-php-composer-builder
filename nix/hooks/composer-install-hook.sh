@@ -91,6 +91,7 @@ composerInstallInstallHook() {
       --no-ansi \
       --no-interaction \
       --no-scripts \
+      --no-plugins \
       install
 
     # Remove packages.json, we don't need it in the store.
