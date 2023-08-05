@@ -174,7 +174,7 @@ mezzio-skeleton = pkgs.api.buildComposerProject {
 ```nix
 satis = pkgs.api.buildComposerProject {
   pname = "satis";
-  version = "3.15.0-dev";
+  version = "3.0.0-dev";
 
   src = pkgs.fetchFromGitHub {
     owner = "composer";
