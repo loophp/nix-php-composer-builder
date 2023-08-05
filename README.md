@@ -85,8 +85,6 @@ packages.default = pkgs.api.buildComposerProject {
 
 ```nix
 drupal = pkgs.api.buildComposerProject {
-  inherit php;
-
   pname = "drupal";
   version = "11.x-dev";
 
