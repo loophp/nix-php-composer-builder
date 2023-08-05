@@ -51,7 +51,7 @@ composerRepositoryInstallHook() {
     # Build the local composer repository
     # The command 'build-local-repo' is provided by the Composer plugin
     # drupol/composer-local-repo-plugin.
-    COMPOSER_CACHE_DIR=false \
+    COMPOSER_CACHE_DIR=/dev/null \
     composer-local-repo-plugin --no-ansi build-local-repo -r $out
 
     # Copy the composer.lock files to the output directory, in case it has been
