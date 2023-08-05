@@ -29,7 +29,7 @@ this repository alive and it will be archived.
 
 ### Step 1
 
-Add this input to your flake:
+Add the input of this flake to your own flake:
 
 ```nix
 {
@@ -64,7 +64,7 @@ pkgs = import inputs.nixpkgs {
 Use the `buildComposerProject` function to build your project:
 
 ```nix
-packages.default = pkgs.api.buildComposerProject {
+myPhpProject = pkgs.api.buildComposerProject {
     # Customize the version of PHP you want to use.
     # inherit php;
 
