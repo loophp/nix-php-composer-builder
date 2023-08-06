@@ -26,7 +26,18 @@ be archived.
 
 ## Usage
 
-### Step 1
+This flake provides a default template to get you started quickly. To use it,
+run:
+
+```bash
+nix flake init --template github:loophp/nix-php-composer-builder#basic
+```
+
+However, you can follow the steps below for a more manual approach:
+
+<details>
+
+<summary>Step 1</summary>
 
 Add a new input to your own flake:
 
@@ -45,7 +56,11 @@ Add a new input to your own flake:
 }
 ```
 
-### Step 2
+</details>
+
+<details>
+
+<summary>Step 2</summary>
 
 This flake provides a default overlay, import it in your own flake:
 
@@ -58,7 +73,11 @@ pkgs = import inputs.nixpkgs {
 };
 ```
 
-### Step 3
+</details>
+
+<details>
+
+<summary>Step 3</summary>
 
 Use the `buildComposerProject` function to build your project:
 
@@ -75,6 +94,8 @@ myPhpProject = pkgs.api.buildComposerProject {
     vendorHash = "sha256-O2+ner833dlj0JSg/paBXcrgk1SuRF6hIdZ7Pn+MCx4=";
 };
 ```
+
+</details>
 
 ## Examples
 
