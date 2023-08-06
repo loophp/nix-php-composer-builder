@@ -20,16 +20,15 @@ implementing it into existing flakes but also facilitates its enhancement and
 foster user contributions.
 
 The idea is that each improvements that are made in this project will be merged
-to some extent in the upstream PR against `nixpkgs`.
-
-Once this builder will be merged in `nixpkgs`, there will be no reason to keep
-this repository alive and it will be archived.
+to some extent in the upstream PR against `nixpkgs`. Once the PR will be merged
+in `nixpkgs`, there will be no reason to keep this repository alive and it will
+be archived.
 
 ## Usage
 
 ### Step 1
 
-Add the input of this flake to your own flake:
+Add a new input to your own flake:
 
 ```nix
 {
@@ -48,7 +47,7 @@ Add the input of this flake to your own flake:
 
 ### Step 2
 
-Import the overlay:
+This flake provides a default overlay, import it in your own flake:
 
 ```nix
 pkgs = import inputs.nixpkgs {
