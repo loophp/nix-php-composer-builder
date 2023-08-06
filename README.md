@@ -188,6 +188,24 @@ satis = pkgs.api.buildComposerProject {
 
 </details>
 
+## Extra (work in progress)
+
+This flake also provides a `buildPhpFromComposer` function that will create a
+the propoer PHP environment from an existing `composer.json` file, and make sure
+that the extensions defined in the `composer.json` file are properly installed.
+
+Instead of doing:
+
+```nix
+php = php.withExtensions({enabled, all}: enabled ++ [ all.xsl all.pcov ]);
+```
+
+You can now just do:
+
+```nix
+php = pkgs.api.buildPhpFromComposer { composerJson = ./composer.json; };
+```
+
 ## Contributing
 
 Feel free to contribute by sending pull requests. We are a usually very
