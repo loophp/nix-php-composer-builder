@@ -203,7 +203,14 @@ php = php.withExtensions({enabled, all}: enabled ++ [ all.xsl all.pcov ]);
 You can now just do:
 
 ```nix
-php = pkgs.api.buildPhpFromComposer { composerJson = ./composer.json; };
+php = pkgs.api.buildPhpFromComposer { inherit src; };
+```
+
+To modify the PHP configuration, create a file `.user.ini` in the project with
+custom PHP configuration directives:
+
+```ini
+memory_limit=-1
 ```
 
 ## Contributing

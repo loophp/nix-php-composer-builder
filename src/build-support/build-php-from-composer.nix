@@ -30,13 +30,12 @@ let
     map (x: builtins.substring 4 (builtins.stringLength x) x) (builtins.filter (x: (builtins.substring 0 4 x) == "ext-") (lib.flatten composerRequiresMap));
 in
 {
-  composerJson ? ./composer.json
+  src
 , php ? inputs.php
 , extensions ? [ ]
 , withExtensions ? [ ]
 , withoutExtensions ? [ ]
 , extraConfig ? ""
-, extraConfigFile ? ./.user.ini
 , flags ? { }
 }:
 let
@@ -48,8 +47,8 @@ in
     extraConfig
     + "\n"
     + (
-      if builtins.pathExists extraConfigFile
-      then builtins.readFile extraConfigFile
+      if builtins.pathExists "${src}/.user.ini"
+      then builtins.readFile "${src}/.user.ini"
       else ""
     );
 
@@ -108,6 +107,6 @@ in
     (buildExtensions {
       inherit (extensions) all enabled;
       inherit withExtensions withoutExtensions;
-      composerExtensions = (getExtensionsFromSection { inherit composerJson; section = "require"; default = { }; }) ++ (getExtensionsFromSection { inherit composerJson; section = "require-dev"; default = { }; });
+      composerExtensions = (getExtensionsFromSection { composerJson = "${src}/composer.json"; section = "require"; default = { }; }) ++ (getExtensionsFromSection { composerJson = "${src}/composer.json"; section = "require-dev"; default = { }; });
     });
 })
