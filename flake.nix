@@ -6,6 +6,13 @@
 
     flake =
       {
+        templates = {
+          basic = {
+            path = ./templates/basic;
+            description = "A basic container for getting started with PHP development";
+          };
+        };
+
         overlays.default = final: prev:
           let
             buildComposerProject =
