@@ -190,9 +190,10 @@ satis = pkgs.api.buildComposerProject {
 
 ## Extra (work in progress)
 
-This flake also provides a `buildPhpFromComposer` function that will create a
-the propoer PHP environment from an existing `composer.json` file, and make sure
-that the extensions defined in the `composer.json` file are properly installed.
+This flake provides a `buildPhpFromComposer` function, which is designed to
+generate an adequate PHP environment from an existing `composer.json` file. It
+ensures that the extensions specified within the `composer.json` file are
+correctly installed.
 
 Instead of doing:
 
