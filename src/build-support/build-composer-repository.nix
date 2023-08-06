@@ -47,20 +47,9 @@ let
 
       strictDeps = previousAttrs.strictDeps or true;
 
-      # Should we keep these empty phases?
-      configurePhase = previousAttrs.configurePhase or ''
-        runHook preConfigure
-
-        runHook postConfigure
-      '';
-
-      buildPhase = previousAttrs.buildPhase or ''
-        runHook preBuild
-
-        runHook postBuild
-      '';
 
       doCheck = previousAttrs.doCheck or true;
+
       checkPhase = previousAttrs.checkPhase or ''
         runHook preCheck
 

@@ -11,17 +11,17 @@
             let
               buildComposerProject =
                 let
-                  composerHooks = prev.callPackages ./nix/hooks/default.nix { inherit (prev) php; };
+                  composerHooks = prev.callPackages ./src/hooks/default.nix { inherit (prev) php; };
 
-                  composer-local-repo-plugin = prev.callPackage ./nix/composer-local-repo-plugin.nix {
+                  composer-local-repo-plugin = prev.callPackage ./src/pkgs/composer-local-repo-plugin.nix {
                     composer = prev.php.packages.composer;
                   };
 
-                  mkComposerRepository = prev.callPackage ./nix/build-composer-repository.nix {
+                  mkComposerRepository = prev.callPackage ./src/build-support/build-composer-repository.nix {
                     inherit composer-local-repo-plugin composerHooks;
                   };
                 in
-                prev.callPackage ./nix/build-composer-project.nix {
+                prev.callPackage ./src/build-support/build-composer-project.nix {
                   inherit composer-local-repo-plugin mkComposerRepository composerHooks;
                 };
             in
