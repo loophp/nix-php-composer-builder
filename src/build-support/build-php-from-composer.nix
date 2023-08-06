@@ -29,8 +29,7 @@ let
     # Convert the set into a list, filter out values not starting with "ext-", get rid of the first 4 characters from the name
     map (x: builtins.substring 4 (builtins.stringLength x) x) (builtins.filter (x: (builtins.substring 0 4 x) == "ext-") (lib.flatten composerRequiresMap));
 in
-{
-  src
+{ src
 , php ? inputs.php
 , extensions ? [ ]
 , withExtensions ? [ ]
