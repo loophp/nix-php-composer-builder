@@ -228,8 +228,22 @@ You can now just do:
 php = pkgs.api.buildPhpFromComposer { inherit src; };
 ```
 
+As long as your `composer.json` list the required extensions in the `require` or
+`require-dev` sections, as such:
+
+```json
+{
+  # ...8<...
+  "require": {
+    "ext-xsl": "*",
+    "ext-pcov": "*"
+  }
+  # ...>8...
+}
+```
+
 To modify the PHP configuration, create a file `.user.ini` in the project with
-custom PHP configuration directives:
+your custom PHP configuration directives:
 
 ```ini
 memory_limit=-1
