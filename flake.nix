@@ -10,7 +10,7 @@
           basic = {
             path = ./templates/basic;
             description = "A basic container for getting started with PHP development";
-            welcomeText = builtins.readFile ./templates/basic/README.md;
+            welcomeText = builtins.readFile ./templates/basic/_README_.md;
           };
         };
 
