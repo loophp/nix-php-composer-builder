@@ -72,6 +72,10 @@
             program = "${(pkgs.writeShellApplication {
               name = "composer";
 
+              buildInputs = [
+                php
+              ];
+
               text = ''
                 ${lib.getExe php.packages.composer} "$@"
               '';
