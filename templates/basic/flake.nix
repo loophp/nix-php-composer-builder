@@ -74,6 +74,7 @@
 
               runtimeInputs = [
                 php
+                php.packages.composer
               ];
 
               text = ''
