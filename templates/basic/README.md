@@ -19,12 +19,15 @@ Features of this flake template include:
 - A default flake development shell with PHP and Composer. If you're using
   `direnv`, it will be automatically loaded. Otherwise use it with:
   `nix develop .`
-- The `composer` flake application. Use it with:
-  `nix run .#composer -- --version`
 - The `satis` flake package provided as example on how to bundle a PHP
   application.
 - The `satis` flake application provided as example. Use it with:
   `nix run .#satis -- --version`
+- The `composer` flake application. Use it with:
+  `nix run .#composer -- --version`
+- The `phpunit` flake application. Use it with: `nix run .#phpunit -- --version`
+- The `phpstan` flake application. Use it with: `nix run .#phpstan -- --version`
+- The `psalm` flake application. Use it with: `nix run .#psalm -- --version`
 
 For each features, Nix will detect the required extensions for PHP by reading
 the `composer.json` file. As long as your `composer.json` file list the required

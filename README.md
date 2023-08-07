@@ -33,6 +33,9 @@ run:
 nix flake init --template github:loophp/nix-php-composer-builder#basic
 ```
 
+This template is designed to provide a basic flake template for PHP development.
+It includes a set of tools like `composer`, `phpunit`, `phpstan` and `psalm`.
+
 However, you can follow the steps below for a more manual approach:
 
 <details>

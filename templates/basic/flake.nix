@@ -46,6 +46,7 @@
         };
 
         devShells.default = pkgs.mkShellNoCC {
+          name = "php-devshell";
           buildInputs = [
             inputs.self.packages."${system}".satis
             php
@@ -81,6 +82,56 @@
                 ${lib.getExe php.packages.composer} "$@"
               '';
             })}/bin/composer";
+          };
+
+          # nix run .#phpunit -- --version
+          phpunit = {
+            type = "app";
+            program = "${(pkgs.writeShellApplication {
+              name = "phpunit";
+
+              runtimeInputs = [
+                php
+              ];
+
+              text = ''
+                ${lib.getExe pkgs.phpunit} "$@"
+              '';
+            })}/bin/phpunit";
+          };
+
+          # nix run .#phpstan -- --version
+          phpstan = {
+            type = "app";
+            program = "${(pkgs.writeShellApplication {
+              name = "phpstan";
+
+              runtimeInputs = [
+                php
+                php.packages.phpstan
+              ];
+
+              text = ''
+                ${lib.getExe php.packages.phpstan} "$@"
+              '';
+            })}/bin/phpstan";
+          };
+
+          # nix run .#psalm -- --version
+          psalm = {
+            type = "app";
+            program = "${(pkgs.writeShellApplication {
+              name = "psalm";
+
+              runtimeInputs = [
+                php
+                php.packages.psalm
+              ];
+
+              text = ''
+                ${lib.getExe php.packages.psalm} "$@"
+              '';
+            })}/bin/psalm";
           };
         };
       };
