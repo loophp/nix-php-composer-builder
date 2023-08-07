@@ -20,6 +20,7 @@
 
               When using this template, two new files will be created in your
               project:
+
               - `flake.nix`: A default flake file for your project, containing
                 the basic configuration for starting PHP development.
               - `flake.lock`: A lock file to lock the versions of the
