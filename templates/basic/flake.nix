@@ -72,7 +72,7 @@
             program = "${(pkgs.writeShellApplication {
               name = "composer";
 
-              buildInputs = [
+              runtimeInputs = [
                 php
               ];
 
