@@ -18,7 +18,15 @@
               This template is designed to provide a basic flake template for
               PHP development.
 
-              Features of this template include:
+              When using this template, two new files will be created in your
+              project:
+              - `flake.nix`: A default flake file for your project, containing
+                the basic configuration for starting PHP development.
+              - `flake.lock`: A lock file to lock the versions of the
+                dependencies like `php` and `composer`. Use `nix flake update`
+                to update them at your convenience.
+
+              Features of this flake template include:
 
               - A default `PHP development shell` with PHP and Composer.
                 Use it with: `nix develop .`
@@ -39,7 +47,10 @@
               `.user.ini` in the project with your custom PHP configuration
               directives.
 
-              Happy coding !
+              For more customizations, feel free to edit the `flake.nix` file
+              and add your own changes; the possibilities are endless.
+
+              Happy hacking !
             '';
           };
         };
