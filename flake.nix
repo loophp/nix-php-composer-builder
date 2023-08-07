@@ -13,14 +13,16 @@
           };
         };
 
-        overlays.default = final: prev:
-          let
+        overlays.default = final: prev: {
+          api = {
+            buildPhpFromComposer = prev.callPackage ./src/build-support/build-php-from-composer.nix { };
+
             buildComposerProject =
               let
                 composerHooks = prev.callPackages ./src/hooks/default.nix { };
 
                 composer-local-repo-plugin = prev.callPackage ./src/pkgs/composer-local-repo-plugin.nix {
-                  composer = prev.php.packages.composer;
+                  inherit (prev.php.packages) composer;
                 };
 
                 mkComposerRepository = prev.callPackage ./src/build-support/build-composer-repository.nix {
@@ -30,14 +32,8 @@
               prev.callPackage ./src/build-support/build-composer-project.nix {
                 inherit composer-local-repo-plugin mkComposerRepository composerHooks;
               };
-
-            buildPhpFromComposer = prev.callPackage ./src/build-support/build-php-from-composer.nix { };
-          in
-          {
-            api = {
-              inherit buildComposerProject buildPhpFromComposer;
-            };
           };
+        };
       };
   };
 }
