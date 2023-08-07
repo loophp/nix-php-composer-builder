@@ -4,11 +4,11 @@ A Nix builder for PHP projects that uses [Composer](https://getcomposer.org/).
 
 ## History
 
-The development of this PHP builder started in April 2023.
-The objective was to create a totally new PHP builder capable of building PHP
-projects using Composer. Given that Composer, despite its excellent package
-management capabilities, lacks the ability to create reproducible builds out of
-the box, this task posed a significant challenge.
+The development of this PHP builder started in April 2023. The objective was to
+create a totally new PHP builder capable of building PHP projects using
+Composer. Given that Composer, despite its excellent package management
+capabilities, lacks the ability to create reproducible builds out of the box,
+this task posed a significant challenge.
 
 [A pull request](https://github.com/NixOS/nixpkgs/pull/225401) was initiated
 against `nixpkgs` and it is currently awaiting for reviews. The entire history
