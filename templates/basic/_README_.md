@@ -5,19 +5,22 @@
 This template is designed to provide a basic flake template for
 PHP development.
 
-When using this template, two new files will be created in your
-project:
+When using this template, four new files will be created in your project:
 
 - `flake.nix`: A default flake file for your project, containing
   the basic configuration for starting PHP development.
 - `flake.lock`: A lock file to lock the versions of the
   dependencies like `php` and `composer`. Use `nix flake update`
   to update them at your convenience.
+- `_README_.md`: This file.
+- `.envrc`: A file used by `direnv` that will automatically load the development
+  environment.
 
 Features of this flake template include:
 
-- A default flake development shell with PHP and Composer.
-  Use it with: `nix develop .`
+- A default flake development shell with PHP and Composer. If you're using
+  `direnv`, it will be automatically loaded. Otherwise use it
+  with: `nix develop .`
 - The `composer` flake application.
   Use it with: `nix run .#composer -- --version`
 - The `satis` flake package provided as example on how to bundle a PHP
