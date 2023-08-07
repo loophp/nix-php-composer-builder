@@ -21,13 +21,13 @@
               Features of this template include:
 
               - A default `PHP development shell` with PHP and Composer.
-                Use it with `nix develop .`
-              - The `composer` flake application
-                Use it with `nix run .#composer -- --version`
+                Use it with: `nix develop .`
+              - The `composer` flake application.
+                Use it with: `nix run .#composer -- --version`
               - The `satis` package provided as example on how to bundle a PHP
-                application
-              - The `satis` flake application provided as example
-                Use it with `nix run .#satis -- --version`
+                application.
+              - The `satis` flake application provided as example.
+                Use it with: `nix run .#satis -- --version`
 
               For each features, Nix will detect the required extensions for PHP
               by reading the `composer.json` file. As long as your
