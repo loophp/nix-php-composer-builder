@@ -1,6 +1,6 @@
 # Basic PHP/Composer template
 
-## Intended usage
+## Usage
 
 This template is designed to provide a basic flake template for PHP development.
 
