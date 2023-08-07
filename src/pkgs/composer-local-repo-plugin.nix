@@ -1,33 +1,10 @@
-{ stdenvNoCC
+{ fetchFromGitHub
 , lib
-, fetchFromGitHub
-, composer
 , makeBinaryWrapper
-, ...
+, php
+, stdenvNoCC
 }:
-let
-  composerKeys = stdenvNoCC.mkDerivation (finalComposerKeysAttrs: {
-    pname = "composer-keys";
-    version = "fa5a62092f33e094073fbda23bbfc7188df3cbc5";
 
-    src = fetchFromGitHub {
-      owner = "composer";
-      repo = "composer.github.io";
-      rev = "${finalComposerKeysAttrs.version}";
-      hash = "sha256-3Sfn71LDG1jHwuEIU8iEnV3k6D6QTX7KVIKVaNSuCVE=";
-    };
-
-    installPhase = ''
-      runHook preInstall
-
-      mkdir -p $out
-      install releases.pub $out/keys.tags.pub
-      install snapshots.pub $out/keys.dev.pub
-
-      runHook postInstall
-    '';
-  });
-in
 stdenvNoCC.mkDerivation (finalAttrs: {
   pname = "composer-local-repo-plugin";
   version = "40bfd0c52439d89994e7414299493a097705a541";
@@ -49,7 +26,7 @@ stdenvNoCC.mkDerivation (finalAttrs: {
   ];
 
   buildInputs = [
-    composer
+    php.packages.composer
   ];
 
   configurePhase = ''
@@ -93,17 +70,41 @@ stdenvNoCC.mkDerivation (finalAttrs: {
     runHook postCheck
   '';
 
-  installPhase = ''
-    runHook preInstall
+  installPhase =
+    let
+      composerKeys = stdenvNoCC.mkDerivation (finalComposerKeysAttrs: {
+        pname = "composer-keys";
+        version = "fa5a62092f33e094073fbda23bbfc7188df3cbc5";
 
-    mkdir -p $out
-    cp -ar ${composerKeys}/* $out/
+        src = fetchFromGitHub {
+          owner = "composer";
+          repo = "composer.github.io";
+          rev = "${finalComposerKeysAttrs.version}";
+          hash = "sha256-3Sfn71LDG1jHwuEIU8iEnV3k6D6QTX7KVIKVaNSuCVE=";
+        };
 
-    makeWrapper ${composer}/bin/composer $out/bin/composer-local-repo-plugin \
-      --prefix COMPOSER_HOME : $out
+        installPhase = ''
+          runHook preInstall
 
-    runHook postInstall
-  '';
+          mkdir -p $out
+          install releases.pub $out/keys.tags.pub
+          install snapshots.pub $out/keys.dev.pub
+
+          runHook postInstall
+        '';
+      });
+    in
+    ''
+      runHook preInstall
+
+      mkdir -p $out
+      cp -ar ${composerKeys}/* $out/
+
+      makeWrapper ${php.packages.composer}/bin/composer $out/bin/composer-local-repo-plugin \
+        --prefix COMPOSER_HOME : $out
+
+      runHook postInstall
+    '';
 
   meta = {
     description = "Composer local repo plugin for Composer";

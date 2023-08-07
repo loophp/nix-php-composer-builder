@@ -20,10 +20,7 @@
           buildComposerProject =
             let
               composerHooks = prev.callPackages ./src/hooks/default.nix { };
-
-              composer-local-repo-plugin = prev.callPackage ./src/pkgs/composer-local-repo-plugin.nix {
-                inherit (prev.php.packages) composer;
-              };
+              composer-local-repo-plugin = prev.callPackage ./src/pkgs/composer-local-repo-plugin.nix { };
 
               mkComposerRepository = prev.callPackage ./src/build-support/build-composer-repository.nix {
                 inherit composer-local-repo-plugin composerHooks;
