@@ -30,7 +30,7 @@
                 owner = "composer";
                 repo = "satis";
                 rev = "23fdf4c1893567c6e46a2cc7fcc868b913f03b28";
-                sha256 = "sha256-UMf9/UQl7lK+AG58lBBFkJMpklooWJ4vpAX5ibciFJI=";
+                hash = "sha256-UMf9/UQl7lK+AG58lBBFkJMpklooWJ4vpAX5ibciFJI=";
               };
             in
             pkgs.api.buildComposerProject {
