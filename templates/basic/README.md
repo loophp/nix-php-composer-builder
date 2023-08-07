@@ -12,7 +12,7 @@ When using this template, four new files will be created in your project:
 - `flake.lock`: A lock file to lock the versions of the
   dependencies like `php` and `composer`. Use `nix flake update`
   to update them at your convenience.
-- `_README_.md`: This file.
+- `README.md`: This file.
 - `.envrc`: A file used by `direnv` that will automatically load the development
   environment.
 
