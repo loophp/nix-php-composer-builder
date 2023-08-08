@@ -64,19 +64,19 @@
           # nix run .#satis -- --version
           satis = {
             type = "app";
-            program = "${(pkgs.writeShellApplication {
+            program = lib.getExe (pkgs.writeShellApplication {
               name = "satis";
 
               text = ''
                 ${lib.getExe self'.packages.satis} "$@"
               '';
-            })}/bin/satis";
+            });
           };
 
           # nix run .#composer -- --version
           composer = {
             type = "app";
-            program = "${(pkgs.writeShellApplication {
+            program = lib.getExe (pkgs.writeShellApplication {
               name = "composer";
 
               runtimeInputs = [
@@ -87,13 +87,13 @@
               text = ''
                 ${lib.getExe php.packages.composer} "$@"
               '';
-            })}/bin/composer";
+            });
           };
 
           # nix run .#grumphp -- --version
           grumphp = {
             type = "app";
-            program = "${(pkgs.writeShellApplication {
+            program = lib.getExe (pkgs.writeShellApplication {
               name = "grumphp";
 
               runtimeInputs = [
@@ -103,13 +103,13 @@
               text = ''
                 ${lib.getExe php.packages.grumphp} "$@"
               '';
-            })}/bin/grumphp";
+            });
           };
 
           # nix run .#phpunit -- --version
           phpunit = {
             type = "app";
-            program = "${(pkgs.writeShellApplication {
+            program = lib.getExe (pkgs.writeShellApplication {
               name = "phpunit";
 
               runtimeInputs = [
@@ -119,13 +119,13 @@
               text = ''
                 ${lib.getExe pkgs.phpunit} "$@"
               '';
-            })}/bin/phpunit";
+            });
           };
 
           # nix run .#phpstan -- --version
           phpstan = {
             type = "app";
-            program = "${(pkgs.writeShellApplication {
+            program = lib.getExe (pkgs.writeShellApplication {
               name = "phpstan";
 
               runtimeInputs = [
@@ -136,13 +136,13 @@
               text = ''
                 ${lib.getExe php.packages.phpstan} "$@"
               '';
-            })}/bin/phpstan";
+            });
           };
 
           # nix run .#psalm -- --version
           psalm = {
             type = "app";
-            program = "${(pkgs.writeShellApplication {
+            program = lib.getExe (pkgs.writeShellApplication {
               name = "psalm";
 
               runtimeInputs = [
@@ -153,7 +153,7 @@
               text = ''
                 ${lib.getExe php.packages.psalm} "$@"
               '';
-            })}/bin/psalm";
+            });
           };
         };
       };
