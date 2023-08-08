@@ -12,7 +12,10 @@
 
     perSystem = { config, self', inputs', pkgs, system, lib, ... }:
       let
-        php = pkgs.api.buildPhpFromComposer { src = inputs.self; };
+        php = pkgs.api.buildPhpFromComposer {
+          src = inputs.self;
+          php = pkgs.php81; # Change to php81, php82, php83 etc.
+        };
       in
       {
         _module.args.pkgs = import self.inputs.nixpkgs {
