@@ -90,6 +90,22 @@
             })}/bin/composer";
           };
 
+          # nix run .#grumphp -- --version
+          grumphp = {
+            type = "app";
+            program = "${(pkgs.writeShellApplication {
+              name = "grumphp";
+
+              runtimeInputs = [
+                php
+              ];
+
+              text = ''
+                ${lib.getExe php.packages.grumphp} "$@"
+              '';
+            })}/bin/grumphp";
+          };
+
           # nix run .#phpunit -- --version
           phpunit = {
             type = "app";
