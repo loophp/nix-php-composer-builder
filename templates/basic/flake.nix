@@ -48,7 +48,7 @@
         devShells.default = pkgs.mkShellNoCC {
           name = "php-devshell";
           buildInputs = [
-            inputs.self.packages."${system}".satis
+            self'.packages.satis
             php
             php.packages.composer
           ];
@@ -62,7 +62,7 @@
               name = "satis";
 
               text = ''
-                ${lib.getExe inputs.self.packages."${system}".satis} "$@"
+                ${lib.getExe self'.packages.satis} "$@"
               '';
             })}/bin/satis";
           };
