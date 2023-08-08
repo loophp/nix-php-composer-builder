@@ -34,7 +34,7 @@ in
 , extensions ? [ ]
 , withExtensions ? [ ]
 , withoutExtensions ? [ ]
-, extraConfig ? ""
+, extraConfig ? null
 , flags ? { }
 }:
 let
@@ -42,14 +42,10 @@ let
   phpDrv = if builtins.isString php then pkgs."${php}" else php;
 in
 ((phpDrv.override flags).buildEnv {
-  extraConfig =
-    extraConfig
-    + "\n"
-    + (
-      if builtins.pathExists "${src}/.user.ini"
-      then builtins.readFile "${src}/.user.ini"
-      else ""
-    );
+  extraConfig = lib.concatStrings [
+    (lib.optionalString (extraConfig != null) extraConfig)
+    (lib.optionalString (builtins.pathExists "${src}/.user.ini") (builtins.readFile "${src}/.user.ini"))
+  ];
 
   extensions = extensions@{ all, enabled, ... }:
     let
