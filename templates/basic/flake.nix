@@ -48,9 +48,12 @@
         devShells.default = pkgs.mkShellNoCC {
           name = "php-devshell";
           buildInputs = [
-            self'.packages.satis
             php
             php.packages.composer
+            php.packages.phpstan
+            php.packages.psalm
+            pkgs.phpunit
+            self'.packages.satis
           ];
         };
 
