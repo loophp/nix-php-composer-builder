@@ -45,6 +45,7 @@ in
   extraConfig = lib.concatStrings [
     (lib.optionalString (extraConfig != null) extraConfig)
     (lib.optionalString (builtins.pathExists "${src}/.user.ini") (builtins.readFile "${src}/.user.ini"))
+    (lib.optionalString (builtins.pathExists "${builtins.getEnv "PWD"}/.user.ini") (builtins.readFile "${builtins.getEnv "PWD"}/.user.ini"))
   ];
 
   extensions = extensions@{ all, enabled, ... }:
@@ -102,6 +103,10 @@ in
     (buildExtensions {
       inherit (extensions) all enabled;
       inherit withExtensions withoutExtensions;
-      composerExtensions = (getExtensionsFromSection { composerJson = "${src}/composer.json"; section = "require"; default = { }; }) ++ (getExtensionsFromSection { composerJson = "${src}/composer.json"; section = "require-dev"; default = { }; });
+      composerExtensions =
+        (getExtensionsFromSection { composerJson = "${src}/composer.json"; section = "require"; default = { }; }) ++
+        (getExtensionsFromSection { composerJson = "${src}/composer.json"; section = "require-dev"; default = { }; }) ++
+        (getExtensionsFromSection { composerJson = "${builtins.getEnv "PWD"}/composer.json"; section = "require"; default = { }; }) ++
+        (getExtensionsFromSection { composerJson = "${builtins.getEnv "PWD"}/composer.json"; section = "require-dev"; default = { }; });
     });
 })
