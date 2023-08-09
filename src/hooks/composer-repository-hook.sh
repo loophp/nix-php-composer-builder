@@ -46,7 +46,7 @@ composerRepositoryBuildHook() {
 composerRepositoryCheckHook() {
     echo "Executing composerRepositoryCheckHook"
 
-    composer validate --no-ansi --no-interaction --no-check-lock
+    composer validate --no-ansi --no-interaction
 
     echo "Finished composerRepositoryCheckHook"
 }
