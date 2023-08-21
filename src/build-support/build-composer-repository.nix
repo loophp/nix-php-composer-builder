@@ -26,12 +26,22 @@ let
     let
       phpDrv = finalAttrs.php or php;
       composer = finalAttrs.composer or phpDrv.packages.composer;
+      composerNoDev = finalAttrs.composerNoDev or "true";
+      composerNoPlugins = finalAttrs.composerNoPlugins or "true";
+      composerNoScripts = finalAttrs.composerNoScripts or "true";
     in
     assert (lib.assertMsg (previousAttrs ? src) "mkComposerRepository expects src argument.");
     assert (lib.assertMsg (previousAttrs ? vendorHash) "mkComposerRepository expects vendorHash argument.");
     assert (lib.assertMsg (previousAttrs ? version) "mkComposerRepository expects version argument.");
     assert (lib.assertMsg (previousAttrs ? pname) "mkComposerRepository expects pname argument.");
+    assert (lib.assertMsg (previousAttrs ? composerNoDev) "mkComposerRepository expects composerNoDev argument.");
+    assert (lib.assertMsg (previousAttrs ? composerNoPlugins) "mkComposerRepository expects composerNoPlugins argument.");
+    assert (lib.assertMsg (previousAttrs ? composerNoScripts) "mkComposerRepository expects composerNoScripts argument.");
     {
+      composerNoDev = previousAttrs.composerNoDev or true;
+      composerNoPlugins = previousAttrs.composerNoPlugins or true;
+      composerNoScripts = previousAttrs.composerNoScripts or true;
+
       name = "${previousAttrs.pname}-${previousAttrs.version}-composer-repository";
 
       # See https://github.com/NixOS/nix/issues/6660
@@ -46,7 +56,6 @@ let
       buildInputs = previousAttrs.buildInputs or [ ];
 
       strictDeps = previousAttrs.strictDeps or true;
-
 
       doCheck = previousAttrs.doCheck or true;
 
