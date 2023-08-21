@@ -65,9 +65,9 @@ composerInstallBuildHook() {
       --no-ansi \
       --no-install \
       --no-interaction \
-      ${composerNoDev:+"--no-dev"} \
-      ${composerNoPlugins:+"--no-plugins"} \
-      ${composerNoScripts:+"--no-scripts"} \
+      ${composerNoDev:+--no-dev} \
+      ${composerNoPlugins:+--no-plugins} \
+      ${composerNoScripts:+--no-scripts} \
       update
 
     echo "Finished composerInstallBuildHook"
@@ -95,9 +95,9 @@ composerInstallInstallHook() {
     composer \
       --no-ansi \
       --no-interaction \
-      ${composerNoDev:+"--no-dev"} \
-      ${composerNoPlugins:+"--no-plugins"} \
-      ${composerNoScripts:+"--no-scripts"} \
+      ${composerNoDev:+--no-dev} \
+      ${composerNoPlugins:+--no-plugins} \
+      ${composerNoScripts:+--no-scripts} \
       install
 
     # Remove packages.json, we don't need it in the store.
