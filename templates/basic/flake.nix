@@ -42,9 +42,27 @@
 
               pname = "statis";
               version = "3.0.0-dev";
-              vendorHash = "sha256-TNBPGY58KVamNWuuNcz/RggurDlMWZicrZNVFyel0w8=";
+              vendorHash = "sha256-YA5UIlGhRVdkz+NFiujGRkb9Zx8Up4IEOmco1rEOkGk=";
 
               meta.mainProgram = "satis";
+            };
+
+          drupal =
+            let
+              src = pkgs.fetchFromGitHub {
+                owner = "drupal";
+                repo = "drupal";
+                rev = "72e7c019993f7d8491de277c66f40354a0967b00";
+                hash = "sha256-nrR+jj8wCTN2RLWxik19emEGyVqzoBiUo6aAfNQZG8Q=";
+              };
+            in
+            pkgs.api.buildComposerProject {
+              inherit src;
+              php = pkgs.api.buildPhpFromComposer { inherit src; };
+
+              pname = "drupal";
+              version = "11.0.0-dev";
+              vendorHash = "sha256-39cCLG4x8/C9XZG2sOCpxO1HUsqt3DduCMMIxPCursw=";
             };
         };
 
