@@ -60,7 +60,7 @@ in
         let
           filterStringExtensions = extList:
             builtins.filter
-              (ext: (builtins.isString ext) && (lib.warnIf (!(all ? "${ext}")) "The ${ext} extension does not exist, ignoring." (all ? "${ext}")))
+              (ext: (builtins.isString ext) && (lib.warnIf (!(all ? "${ext}")) "The ${ext} extension does not exist or is enabled by default in PHP ${phpDrv.version}, ignoring." (all ? "${ext}")))
               extList;
 
           filterDrvExtensions = extList:
@@ -74,7 +74,7 @@ in
 
           # Display a warning when trying to build an extension that is already enabled or does not build
           e0 = builtins.map
-            (ext: lib.warnIf ((builtins.tryEval all."${ext}".outPath).success == false) "The ${ext} extension is enabled in PHP ${phpDrv.version} but failed to instantiate, ignoring." ext)
+            (ext: lib.warnIf ((builtins.tryEval all."${ext}".outPath).success == false) "The ${ext} extension is enabled in PHP ${phpDrv.version} but failed to build, ignoring." ext)
             userExtensionAsStringToAdd;
 
           # Remove extensions that does not build
