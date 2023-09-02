@@ -79,23 +79,30 @@ in
             (ext: (builtins.tryEval all."${ext}".outPath).success)
             e0;
 
+          # Remove extensions provided as derivation to avoid duplicates
+          # 1. Convert withExtensions to a list of strings
+          # 2. Remove extensions that are in `enabled` and `e1` if they are in that list
+          e2 = builtins.filter
+            (ext: !builtins.elem (ext.pname) (builtins.map (e: e.pname) (filterDrvExtensions withExtensions)))
+            (enabled ++ (builtins.map (ext: all."${ext}") e1));
+
           # Consolidate the list of extensions as derivations
-          e2 = enabled ++ (builtins.map (ext: all."${ext}") e1) ++ (filterDrvExtensions withExtensions);
+          e3 = e2 ++ (filterDrvExtensions withExtensions);
 
           # Remove unwanted extensions provided as strings
-          e3 = builtins.filter
+          e4 = builtins.filter
             (ext:
               !((builtins.elem (ext.pname) (builtins.map (e: "php-${e}") userExtensionsAsStringToRemove)) ||
                 (builtins.elem (ext.pname) userExtensionsAsStringToRemove))
             )
-            e2;
+            e3;
 
           # Remove unwanted extensions provided as derivations
-          e4 = builtins.filter
+          e5 = builtins.filter
             (ext: !builtins.elem ext (filterDrvExtensions withoutExtensions))
-            e3;
+            e4;
         in
-        e4;
+        e5;
     in
     (buildExtensions {
       inherit (extensions) all enabled;
