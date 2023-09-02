@@ -39,11 +39,11 @@
         "flake-parts": "flake-parts_2"
       },
       "locked": {
-        "lastModified": 1693639603,
-        "narHash": "sha256-vIqZ2LnxpGJfuHso2YUaifGxijWlO4MXCOWmpcYyQF0=",
+        "lastModified": 1693680016,
+        "narHash": "sha256-UPNqqAHXC6AmqvcshbmxSmeaMdNUrVi623OUDwQCn0A=",
         "owner": "loophp",
         "repo": "nix-php-composer-builder",
-        "rev": "d30c17e3bb9358ae6ab9297a3914e2d4d225ffd2",
+        "rev": "a33e8556e3da8c66b49f61706585c9e7d9b96691",
         "type": "github"
       },
       "original": {
