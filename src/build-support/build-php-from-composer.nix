@@ -63,10 +63,7 @@ in
               (ext: (builtins.isString ext) && (lib.warnIf (!(all ? "${ext}")) "The ${ext} extension does not exist or is enabled by default in PHP ${phpDrv.version}, ignoring." (all ? "${ext}")))
               extList;
 
-          filterDrvExtensions = extList:
-            builtins.filter
-              (ext: (!builtins.isString ext) && (all ? el))
-              extList;
+          filterDrvExtensions = builtins.filter lib.isDerivation;
 
           # Filter only extensions provided as string
           userExtensionAsStringToAdd = filterStringExtensions (withExtensions ++ composerExtensions);
