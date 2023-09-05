@@ -26,6 +26,10 @@
           config.allowUnfree = true;
         };
 
+        checks = {
+          inherit (self'.packages) satis drupal;
+        };
+
         packages = {
           satis =
             let
