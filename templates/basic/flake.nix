@@ -30,6 +30,31 @@
           inherit (self'.packages) satis drupal;
         };
 
+        apps = {
+          symfony-demo = {
+            type = "app";
+            program = lib.getExe (pkgs.writeShellApplication {
+              name = "php-symfony-demo";
+
+              runtimeInputs = [
+                php
+              ];
+
+              text = ''
+                MKTEMP=$(mktemp -u)
+                TMPDIR=$(dirname "$MKTEMP")
+                APP_CACHE_DIR=$TMPDIR/cache
+                APP_LOG_DIR=$APP_CACHE_DIR/log
+                export TMPDIR
+                export APP_CACHE_DIR
+                export APP_LOG_DIR
+
+                ${lib.getExe pkgs.symfony-cli} serve --document-root ${self'.packages.php-app}/share/php/symfony-demo/public --allow-http
+              '';
+            });
+          };
+        };
+
         packages = {
           satis =
             let
@@ -67,6 +92,28 @@
               pname = "drupal";
               version = "11.0.0-dev";
               vendorHash = "sha256-39cCLG4x8/C9XZG2sOCpxO1HUsqt3DduCMMIxPCursw=";
+            };
+
+          symfony-demo =
+            let
+              src = pkgs.fetchFromGitHub {
+                owner = "symfony";
+                repo = "demo";
+                rev = "e8a754777bd400ecf87e8c6eeea8569d4846d357";
+                hash = "sha256-ZG0O8O4X5t/GkAVKhcedd3P7WXYiZ0asMddX1XfUVR4=";
+              };
+            in pkgs.api.buildComposerProject {
+              pname = "symfony-demo";
+              version = "1.0.0";
+
+              inherit src;
+
+              composerNoDev = false;
+              composerNoPlugins = false;
+
+              php = pkgs.api.buildPhpFromComposer { inherit src; };
+
+              vendorHash = "sha256-Nv9pRQJ2Iij1IxPNcCk732Q79FWB/ARJRvjPVVyLMEc=";
             };
         };
 

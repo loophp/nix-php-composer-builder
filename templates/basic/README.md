@@ -28,6 +28,8 @@ Features of this flake template include:
 - The `phpstan` flake application. Use it with: `nix run .#phpstan -- --version`
 - The `phpunit` flake application. Use it with: `nix run .#phpunit -- --version`
 - The `psalm` flake application. Use it with: `nix run .#psalm -- --version`
+- The `symfony-demo` flake application. Run it with `nix run .#symfony-demo`
+  then go on [http://127.0.0.1:8000](http://127.0.0.1:8000).
 
 For each features, Nix will detect the required extensions for PHP by reading
 the `composer.json` file. As long as your `composer.json` file list the required
