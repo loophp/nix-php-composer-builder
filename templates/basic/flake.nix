@@ -49,7 +49,7 @@
                 export APP_CACHE_DIR
                 export APP_LOG_DIR
 
-                ${lib.getExe pkgs.symfony-cli} serve --document-root ${self'.packages.php-app}/share/php/symfony-demo/public --allow-http
+                ${lib.getExe pkgs.symfony-cli} serve --document-root ${self'.packages.symfony-demo}/share/php/symfony-demo/public --allow-http
               '';
             });
           };
