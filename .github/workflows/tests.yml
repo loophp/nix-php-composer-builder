@@ -1,0 +1,21 @@
+name: "Tests"
+
+on:
+    pull_request:
+    push:
+        branches:
+            - "main"
+
+jobs:
+    nix-flake-check:
+        runs-on: ${{ matrix.archs.os }}
+        strategy:
+            fail-fast: false
+            matrix:
+                archs: [{ os: ubuntu-latest, arch: x86_64-linux }, { os: macOS-latest, arch: x86_64-darwin }]
+        steps:
+            - uses: "actions/checkout@v4"
+            - uses: "DeterminateSystems/nix-installer-action@main"
+            - name: nix flake check
+              working-directory: ./tests
+              run: nix flake check --no-write-lock-file

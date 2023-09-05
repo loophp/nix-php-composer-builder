@@ -101,117 +101,17 @@ myPhpProject = pkgs.api.buildComposerProject {
 
 ## Examples
 
-### Packaging Drupal
+See examples on how to package [Drupal](https://github.com/drupal/drupal),
+[Framework-X](https://github.com/clue/framework-x),
+[Mezzio Skeleton](https://github.com/mezzio/mezzio-skeleton),
+[Satis](https://github.com/composer/satis) or
+[Symfony Demo](https://github.com/symfony/demo) in the
+[checks.nix](./tests/checks.nix) file.
 
-<details>
+Those derivations are also used in the tests to ensure that the builds are
+consistent.
 
-```nix
-drupal = pkgs.api.buildComposerProject {
-  pname = "drupal";
-  version = "11.x-dev";
-
-  src = pkgs.fetchFromGitHub {
-    owner = "drupal";
-    repo = "drupal";
-    rev = "aec9cf8ca15958546b882f8eb371080dbd39b9ed";
-    hash = "sha256-GzGm1X5uKCqkKowWCce7xOjgGa9uDzywSMGJlorNLlY=";
-  };
-
-  vendorHash = "sha256-CJtf7r3EhjZTL2vKGXokqy1+uONNq+bA+wGrDmeqIRs=";
-};
-```
-
-</details>
-
-### Packaging `symfony/demo`
-
-<details>
-
-```nix
-symfony-demo = pkgs.api.buildComposerProject {
-  pname = "symfony-demo";
-  version = "2.3.0-dev";
-
-  src = pkgs.fetchFromGitHub {
-    owner = "symfony";
-    repo = "demo";
-    rev = "e8a754777bd400ecf87e8c6eeea8569d4846d357";
-    hash = "sha256-ZG0O8O4X5t/GkAVKhcedd3P7WXYiZ0asMddX1XfUVR4=";
-  };
-
-  vendorHash = "sha256-Nv9pRQJ2Iij1IxPNcCk732Q79FWB/ARJRvjPVVyLMEc=";
-};
-```
-
-</details>
-
-### Packaging `clue/framework-x`
-
-<details>
-
-```nix
-clue-framework-x = pkgs.api.buildComposerProject {
-  pname = "clue-framework-x";
-  version = "1.0.0-dev";
-
-  src = pkgs.fetchFromGitHub {
-    owner = "clue";
-    repo = "framework-x";
-    rev = "277e9a582c90042e3e32c7ef045123848ef147fc";
-    hash = "sha256-wtMJcNwxvqGKtrr8Ak4ON4b9jMwBGlBUs+S2M8iSHf4=";
-  };
-
-  vendorHash = "sha256-ULgZtwT1D371MaeUpEwiS1BQvw22y4/rZsPJ5+HFdhQ=";
-};
-```
-
-</details>
-
-### Packaging `mezzio/mezzio-skeleton`
-
-<details>
-
-```nix
-mezzio-skeleton = pkgs.api.buildComposerProject {
-  pname = "mezzio-skeleton";
-  version = "3.15.0-dev";
-
-  src = pkgs.fetchFromGitHub {
-    owner = "mezzio";
-    repo = "mezzio-skeleton";
-    rev = "2eb90de8cd7b8efb1b31d505385ce92c17153608";
-    hash = "sha256-D3jmCcYXpH92r6yvn/2SlQ1G9yd/izHJjcYfunk/jjA=";
-  };
-
-  vendorHash = "sha256-YYBQ+AV8b8xozJpemjfnTrbY8sWgP8BBp59RLCFHfpc=";
-};
-```
-
-</details>
-
-### Packaging `composer/satis`
-
-<details>
-
-```nix
-satis = pkgs.api.buildComposerProject {
-  pname = "satis";
-  version = "3.0.0-dev";
-
-  src = pkgs.fetchFromGitHub {
-    owner = "composer";
-    repo = "satis";
-    rev = "23fdf4c1893567c6e46a2cc7fcc868b913f03b28";
-    hash = "sha256-UMf9/UQl7lK+AG58lBBFkJMpklooWJ4vpAX5ibciFJI=";
-  };
-
-  vendorHash = "sha256-TNBPGY58KVamNWuuNcz/RggurDlMWZicrZNVFyel0w8=";
-};
-```
-
-</details>
-
-## Extra (work in progress)
+## Extra
 
 This flake provides a `buildPhpFromComposer` function, which is designed to
 generate an adequate PHP environment from an existing `composer.json` file. It
@@ -249,6 +149,19 @@ your custom PHP configuration directives:
 
 ```ini
 memory_limit=-1
+```
+
+## Testing
+
+To evaluate this new PHP/Composer builder, a few PHP derivations provided as
+examples have been written. As the objective of this builder is to guarantee
+reproducible PHP builds, conducting the tests essentially boils down to just
+building these derivations.
+
+To run the tests, execute the following command:
+
+```shell
+nix flake check ./tests --no-write-lock-file
 ```
 
 ## Contributing
