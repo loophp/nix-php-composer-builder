@@ -40,7 +40,7 @@
               inherit src;
               php = pkgs.api.buildPhpFromComposer { inherit src; };
 
-              pname = "statis";
+              pname = "satis";
               version = "3.0.0-dev";
               vendorHash = "sha256-YA5UIlGhRVdkz+NFiujGRkb9Zx8Up4IEOmco1rEOkGk=";
 
