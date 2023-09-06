@@ -27,7 +27,7 @@
         };
 
         checks = {
-          inherit (self'.packages) satis drupal;
+          inherit (self'.packages) drupal satis symfony-demo;
         };
 
         apps = {
