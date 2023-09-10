@@ -12,10 +12,6 @@ preInstallHooks+=(composerInstallInstallHook)
 composerInstallConfigureHook() {
     echo "Executing composerInstallConfigureHook"
 
-    echo "ComposerNoDev: $composerNoDev"
-    echo "ComposerNoPlugins: $composerNoPlugins"
-    echo "ComposerNoScripts: $composerNoScripts"
-
     if [[ ! -e "${composerRepository}" ]]; then
         echo "No local composer repository found."
         exit 1

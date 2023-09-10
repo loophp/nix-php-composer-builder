@@ -1,11 +1,11 @@
 { stdenvNoCC
 , lib
+, callPackage
 , writeTextDir
 , php
 , makeBinaryWrapper
 , fetchFromGitHub
 , fetchurl
-, composer-local-repo-plugin
 , mkComposerRepository
 , composerHooks
 }:
@@ -16,12 +16,10 @@ let
     let
       phpDrv = finalAttrs.php or php;
       composer = finalAttrs.composer or phpDrv.packages.composer;
-      composerLock = finalAttrs.composerLock or null;
-      composerNoDev = finalAttrs.composerNoDev or true;
-      composerNoPlugins = finalAttrs.composerNoPlugins or true;
-      composerNoScripts = finalAttrs.composerNoScripts or true;
+      composer-local-repo-plugin = callPackage ../pkgs/composer-local-repo-plugin.nix { };
     in
     {
+      composerLock = previousAttrs.composerLock or null;
       composerNoDev = previousAttrs.composerNoDev or true;
       composerNoPlugins = previousAttrs.composerNoPlugins or true;
       composerNoScripts = previousAttrs.composerNoScripts or true;
@@ -66,7 +64,12 @@ let
       '';
 
       composerRepository = mkComposerRepository {
-        inherit composer composer-local-repo-plugin composerLock composerNoDev composerNoPlugins composerNoScripts;
+        composerLock = previousAttrs.composerLock or null;
+        composerNoDev = previousAttrs.composerNoDev or true;
+        composerNoPlugins = previousAttrs.composerNoPlugins or true;
+        composerNoScripts = previousAttrs.composerNoScripts or true;
+
+        inherit composer composer-local-repo-plugin;
         inherit (finalAttrs) patches pname src vendorHash version;
       };
 
