@@ -1,9 +1,9 @@
 { stdenvNoCC
 , lib
+, callPackage
 , writeTextDir
 , fetchFromGitHub
 , php
-, composer-local-repo-plugin
 , composerHooks
 }:
 
@@ -26,9 +26,7 @@ let
     let
       phpDrv = finalAttrs.php or php;
       composer = finalAttrs.composer or phpDrv.packages.composer;
-      composerNoDev = finalAttrs.composerNoDev or "true";
-      composerNoPlugins = finalAttrs.composerNoPlugins or "true";
-      composerNoScripts = finalAttrs.composerNoScripts or "true";
+      composer-local-repo-plugin = callPackage ../pkgs/composer-local-repo-plugin.nix { };
     in
     assert (lib.assertMsg (previousAttrs ? src) "mkComposerRepository expects src argument.");
     assert (lib.assertMsg (previousAttrs ? vendorHash) "mkComposerRepository expects vendorHash argument.");
@@ -57,8 +55,20 @@ let
 
       strictDeps = previousAttrs.strictDeps or true;
 
-      doCheck = previousAttrs.doCheck or true;
+      # Should we keep these empty phases?
+      configurePhase = previousAttrs.configurePhase or ''
+        runHook preConfigure
 
+        runHook postConfigure
+      '';
+
+      buildPhase = previousAttrs.buildPhase or ''
+        runHook preBuild
+
+        runHook postBuild
+      '';
+
+      doCheck = previousAttrs.doCheck or true;
       checkPhase = previousAttrs.checkPhase or ''
         runHook preCheck
 
