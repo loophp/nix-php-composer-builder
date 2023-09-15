@@ -12,10 +12,6 @@ preInstallHooks+=(composerInstallInstallHook)
 composerInstallConfigureHook() {
     echo "Executing composerInstallConfigureHook"
 
-    echo "ComposerNoDev: $composerNoDev"
-    echo "ComposerNoPlugins: $composerNoPlugins"
-    echo "ComposerNoScripts: $composerNoScripts"
-
     if [[ ! -e "${composerRepository}" ]]; then
         echo "No local composer repository found."
         exit 1
@@ -110,7 +106,7 @@ composerInstallInstallHook() {
     # Create symlinks for the binaries.
     jq -r -c 'try .bin[]' composer.json | while read -r bin; do
         mkdir -p "$out"/share/php/"${pname}" "$out"/bin
-        ln -s "$out"/share/php/"${pname}"/"$bin" "$out"/bin/"$(basename "$bin")"
+        makeWrapper "$out"/share/php/"${pname}"/"$bin" "$out"/bin/"$(basename "$bin")"
     done
 
     echo "Finished composerInstallInstallHook"
