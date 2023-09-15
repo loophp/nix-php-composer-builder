@@ -30,37 +30,6 @@
           inherit (self'.packages) drupal satis symfony-demo;
         };
 
-        apps = {
-          symfony-demo = {
-            type = "app";
-            program = lib.getExe (pkgs.writeShellApplication {
-              name = "php-symfony-demo";
-
-              runtimeInputs = [
-                php
-              ];
-
-              text = ''
-                APP_CACHE_DIR=$(mktemp -u)/cache
-                APP_LOG_DIR=$APP_CACHE_DIR/log
-                DATABASE_URL=sqlite:///$APP_CACHE_DIR/database.sqlite
-
-                export APP_CACHE_DIR
-                export APP_LOG_DIR
-                export DATABASE_URL
-
-                mkdir -p "$APP_CACHE_DIR"
-                mkdir -p "$APP_LOG_DIR"
-
-                cp -f ${self'.packages.symfony-demo}/share/php/symfony-demo/data/database.sqlite "$APP_CACHE_DIR"/database.sqlite
-                chmod +w "$APP_CACHE_DIR"/database.sqlite
-
-                ${lib.getExe pkgs.symfony-cli} serve --document-root ${self'.packages.symfony-demo}/share/php/symfony-demo/public --allow-http
-              '';
-            });
-          };
-        };
-
         packages = {
           satis =
             let
@@ -136,6 +105,35 @@
         };
 
         apps = {
+          symfony-demo = {
+            type = "app";
+            program = lib.getExe (pkgs.writeShellApplication {
+              name = "php-symfony-demo";
+
+              runtimeInputs = [
+                php
+              ];
+
+              text = ''
+                APP_CACHE_DIR=$(mktemp -u)/cache
+                APP_LOG_DIR=$APP_CACHE_DIR/log
+                DATABASE_URL=sqlite:///$APP_CACHE_DIR/database.sqlite
+
+                export APP_CACHE_DIR
+                export APP_LOG_DIR
+                export DATABASE_URL
+
+                mkdir -p "$APP_CACHE_DIR"
+                mkdir -p "$APP_LOG_DIR"
+
+                cp -f ${self'.packages.symfony-demo}/share/php/symfony-demo/data/database.sqlite "$APP_CACHE_DIR"/database.sqlite
+                chmod +w "$APP_CACHE_DIR"/database.sqlite
+
+                ${lib.getExe pkgs.symfony-cli} serve --document-root ${self'.packages.symfony-demo}/share/php/symfony-demo/public --allow-http
+              '';
+            });
+          };
+
           # nix run .#satis -- --version
           satis = {
             type = "app";
