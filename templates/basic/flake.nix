@@ -31,65 +31,52 @@
         };
 
         packages = {
-          satis =
-            let
-              src = pkgs.fetchFromGitHub {
-                owner = "composer";
-                repo = "satis";
-                rev = "23fdf4c1893567c6e46a2cc7fcc868b913f03b28";
-                hash = "sha256-UMf9/UQl7lK+AG58lBBFkJMpklooWJ4vpAX5ibciFJI=";
-              };
-            in
-            pkgs.api.buildComposerProject {
-              inherit src;
-              php = pkgs.api.buildPhpFromComposer { inherit src; };
+          satis = php.buildComposerProject {
+            pname = "satis";
+            version = "3.0.0-dev";
 
-              pname = "satis";
-              version = "3.0.0-dev";
-              vendorHash = "sha256-YA5UIlGhRVdkz+NFiujGRkb9Zx8Up4IEOmco1rEOkGk=";
-
-              meta.mainProgram = "satis";
+            src = pkgs.fetchFromGitHub {
+              owner = "composer";
+              repo = "satis";
+              rev = "23fdf4c1893567c6e46a2cc7fcc868b913f03b28";
+              hash = "sha256-UMf9/UQl7lK+AG58lBBFkJMpklooWJ4vpAX5ibciFJI=";
             };
 
-          drupal =
-            let
-              src = pkgs.fetchFromGitHub {
-                owner = "drupal";
-                repo = "drupal";
-                rev = "72e7c019993f7d8491de277c66f40354a0967b00";
-                hash = "sha256-nrR+jj8wCTN2RLWxik19emEGyVqzoBiUo6aAfNQZG8Q=";
-              };
-            in
-            pkgs.api.buildComposerProject {
-              inherit src;
-              php = pkgs.api.buildPhpFromComposer { inherit src; };
+            vendorHash = "sha256-YA5UIlGhRVdkz+NFiujGRkb9Zx8Up4IEOmco1rEOkGk=";
 
-              pname = "drupal";
-              version = "11.0.0-dev";
-              vendorHash = "sha256-39cCLG4x8/C9XZG2sOCpxO1HUsqt3DduCMMIxPCursw=";
+            meta.mainProgram = "satis";
+          };
+
+          drupal = php.buildComposerProject {
+            pname = "drupal";
+            version = "11.0.0-dev";
+
+            src = pkgs.fetchFromGitHub {
+              owner = "drupal";
+              repo = "drupal";
+              rev = "72e7c019993f7d8491de277c66f40354a0967b00";
+              hash = "sha256-nrR+jj8wCTN2RLWxik19emEGyVqzoBiUo6aAfNQZG8Q=";
             };
 
-          symfony-demo =
-            let
-              src = pkgs.fetchFromGitHub {
-                owner = "symfony";
-                repo = "demo";
-                rev = "e8a754777bd400ecf87e8c6eeea8569d4846d357";
-                hash = "sha256-ZG0O8O4X5t/GkAVKhcedd3P7WXYiZ0asMddX1XfUVR4=";
-              };
-            in pkgs.api.buildComposerProject {
-              pname = "symfony-demo";
-              version = "1.0.0";
+            vendorHash = "sha256-39cCLG4x8/C9XZG2sOCpxO1HUsqt3DduCMMIxPCursw=";
+          };
 
-              inherit src;
+          symfony-demo = php.buildComposerProject {
+            pname = "symfony-demo";
+            version = "1.0.0";
 
-              composerNoDev = false;
-              composerNoPlugins = false;
-
-              php = pkgs.api.buildPhpFromComposer { inherit src; };
-
-              vendorHash = "sha256-Nv9pRQJ2Iij1IxPNcCk732Q79FWB/ARJRvjPVVyLMEc=";
+            src = pkgs.fetchFromGitHub {
+              owner = "symfony";
+              repo = "demo";
+              rev = "e8a754777bd400ecf87e8c6eeea8569d4846d357";
+              hash = "sha256-ZG0O8O4X5t/GkAVKhcedd3P7WXYiZ0asMddX1XfUVR4=";
             };
+
+            composerNoDev = false;
+            composerNoPlugins = false;
+
+            vendorHash = "sha256-Nv9pRQJ2Iij1IxPNcCk732Q79FWB/ARJRvjPVVyLMEc=";
+          };
         };
 
         devShells.default = pkgs.mkShellNoCC {

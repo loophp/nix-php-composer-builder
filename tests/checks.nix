@@ -2,11 +2,9 @@
 }: let
   php = pkgs.php82;
 in {
-  clue-framework-x = pkgs.api.buildComposerProject {
+  clue-framework-x = php.buildComposerProject {
     pname = "clue-framework-x";
     version = "1.0.0-dev";
-
-    inherit php;
 
     src = pkgs.fetchFromGitHub {
       owner = "clue";
@@ -15,7 +13,7 @@ in {
       hash = "sha256-wtMJcNwxvqGKtrr8Ak4ON4b9jMwBGlBUs+S2M8iSHf4=";
     };
 
-    vendorHash = "sha256-OclFnTrkMjtCWV7kvedTeCP7XairyASCTj1rZEIdokQ=";
+    vendorHash = "sha256-mZR1r4e34fO+oYaCI2YHD3vjHoIDMPTqC44Z3DEyUXQ=";
   };
 
   drupal =
@@ -26,23 +24,22 @@ in {
         rev = "72e7c019993f7d8491de277c66f40354a0967b00";
         hash = "sha256-nrR+jj8wCTN2RLWxik19emEGyVqzoBiUo6aAfNQZG8Q=";
       };
-    in
-    pkgs.api.buildComposerProject {
-      inherit src;
+
       php = pkgs.api.buildPhpFromComposer {
-        inherit php src;
+        inherit src;
       };
+    in
+    php.buildComposerProject {
+      inherit src;
 
       pname = "drupal";
       version = "11.0.0-dev";
       vendorHash = "sha256-39cCLG4x8/C9XZG2sOCpxO1HUsqt3DduCMMIxPCursw=";
     };
 
-  mezzio-skeleton = pkgs.api.buildComposerProject {
+  mezzio-skeleton = php.buildComposerProject {
     pname = "mezzio-skeleton";
     version = "3.15.0-dev";
-
-    inherit php;
 
     src = pkgs.fetchFromGitHub {
       owner = "mezzio";
@@ -54,34 +51,25 @@ in {
     vendorHash = "sha256-ltN6qHeV34oDUt0c5XBPsoKYvIcWf4Q6FQNRymcKFoU=";
   };
 
-  satis =
-    let
-      src = pkgs.fetchFromGitHub {
-        owner = "composer";
-        repo = "satis";
-        rev = "23fdf4c1893567c6e46a2cc7fcc868b913f03b28";
-        hash = "sha256-UMf9/UQl7lK+AG58lBBFkJMpklooWJ4vpAX5ibciFJI=";
-      };
-    in
-    pkgs.api.buildComposerProject {
-      inherit src;
+  satis = php.buildComposerProject {
+    pname = "satis";
+    version = "3.0.0-dev";
 
-      php = pkgs.api.buildPhpFromComposer {
-        inherit php src;
-      };
-
-      pname = "satis";
-      version = "3.0.0-dev";
-      vendorHash = "sha256-YA5UIlGhRVdkz+NFiujGRkb9Zx8Up4IEOmco1rEOkGk=";
-
-      meta.mainProgram = "satis";
+    src = pkgs.fetchFromGitHub {
+      owner = "composer";
+      repo = "satis";
+      rev = "23fdf4c1893567c6e46a2cc7fcc868b913f03b28";
+      hash = "sha256-UMf9/UQl7lK+AG58lBBFkJMpklooWJ4vpAX5ibciFJI=";
     };
 
-  symfony-demo = pkgs.api.buildComposerProject {
+    vendorHash = "sha256-YA5UIlGhRVdkz+NFiujGRkb9Zx8Up4IEOmco1rEOkGk=";
+
+    meta.mainProgram = "satis";
+  };
+
+  symfony-demo = php.buildComposerProject {
     pname = "symfony-demo";
     version = "2.3.0-dev";
-
-    inherit php;
 
     src = pkgs.fetchFromGitHub {
       owner = "symfony";
