@@ -13,7 +13,7 @@ in {
       hash = "sha256-wtMJcNwxvqGKtrr8Ak4ON4b9jMwBGlBUs+S2M8iSHf4=";
     };
 
-    vendorHash = "sha256-mZR1r4e34fO+oYaCI2YHD3vjHoIDMPTqC44Z3DEyUXQ=";
+    vendorHash = "sha256-ER5l3MjPmdPZ/85bRcf2dOHKL1tBG9stQc8n3YsCerg=";
   };
 
   drupal =
