@@ -61,6 +61,63 @@
             vendorHash = "sha256-39cCLG4x8/C9XZG2sOCpxO1HUsqt3DduCMMIxPCursw=";
           };
 
+          symfony-demo-image = pkgs.dockerTools.buildLayeredImage {
+            name = self'.packages.symfony-demo.pname;
+            tag = "latest";
+
+            contents =
+              let
+                caddyFile = pkgs.writeText "Caddyfile" ''
+                  {
+                      email youremail@domain.com
+                  }
+
+                  :80 {
+                      root * /app/public
+                      log
+                      encode gzip
+                      php_fastcgi 127.0.0.1:9000
+                      file_server
+                  }
+
+                  :443 {
+                      root * /app/public
+                      log
+                      encode gzip
+                      php_fastcgi 127.0.0.1:9000
+                      file_server
+                      tls internal {
+                          on_demand
+                      }
+                  }
+                '';
+              in
+              [
+                php
+                pkgs.caddy
+                pkgs.fakeNss
+                (pkgs.writeScriptBin "start-server" ''
+                  #!${pkgs.runtimeShell}
+                  php-fpm -D -y /etc/php-fpm.d/www.conf.default
+                  caddy run --adapter caddyfile --config ${caddyFile}
+                '')
+              ];
+
+            extraCommands = ''
+              ln -s ${self'.packages.symfony-demo}/share/php/${self'.packages.symfony-demo.pname}/public app
+              mkdir -p tmp
+              chmod 1777 tmp
+            '';
+
+            config = {
+              Cmd = [ "start-server" ];
+              ExposedPorts = {
+                "80/tcp" = { };
+                "443/tcp" = { };
+              };
+            };
+          };
+
           symfony-demo = php.buildComposerProject {
             pname = "symfony-demo";
             version = "1.0.0";
