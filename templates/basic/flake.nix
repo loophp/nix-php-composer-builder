@@ -104,9 +104,11 @@
               ];
 
             extraCommands = ''
-              ln -s ${self'.packages.symfony-demo}/share/php/${self'.packages.symfony-demo.pname}/public app
+              ln -s ${self'.packages.symfony-demo}/share/php/${self'.packages.symfony-demo.pname}/ app
               mkdir -p tmp
-              chmod 1777 tmp
+              chmod -R 777 tmp
+              cp ${self'.packages.symfony-demo}/share/php/${self'.packages.symfony-demo.pname}/data/database.sqlite tmp/database.sqlite
+              chmod +w tmp/database.sqlite
             '';
 
             config = {
@@ -131,6 +133,12 @@
 
             composerNoDev = false;
             composerNoPlugins = false;
+
+            preInstall = ''
+              echo APP_CACHE_DIR=/tmp/cache >> .env.local
+              echo APP_LOG_DIR=/tmp/log >> .env.local
+              echo DATABASE_URL=sqlite:////tmp/database.sqlite >> .env.local
+            '';
 
             vendorHash = "sha256-Nv9pRQJ2Iij1IxPNcCk732Q79FWB/ARJRvjPVVyLMEc=";
           };
