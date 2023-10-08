@@ -1,4 +1,6 @@
-# Nix PHP Composer builder
+The features of this flake has been merged in https://github.com/loophp/nix-shell
+
+<!-- # Nix PHP Composer builder
 
 A Nix builder for PHP projects that uses [Composer](https://getcomposer.org/).
 
@@ -178,4 +180,4 @@ Sponsor me on [Github][github sponsors link] and/or any of [the
 contributors][6].
 
 [github sponsors link]: https://github.com/sponsors/drupol
-[6]: https://github.com/loophp/collection/graphs/contributors
+[6]: https://github.com/loophp/collection/graphs/contributors -->
